@@ -12,6 +12,7 @@ on:
           - failure
           - skipped
           - timeout
+          - allowed-timeout
           - success
 
 permissions: {}
@@ -66,3 +67,31 @@ jobs:
     timeout-minutes: 1
     steps:
       - run: exit 1
+
+  allowed-timeout:
+    if: inputs.mode == 'allowed-timeout'
+    continue-on-error: true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: sleep 180
+
+  allowed-timeout-guard:
+    needs: allowed-timeout
+    if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  allowed-timeout-report:
+    needs:
+      - allowed-timeout
+      - allowed-timeout-guard
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: |
+          echo "allowed-timeout=${{ needs.allowed-timeout.result }}"
+          echo "allowed-timeout-guard=${{ needs.allowed-timeout-guard.result }}"
