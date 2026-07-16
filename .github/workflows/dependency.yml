@@ -1,0 +1,29 @@
+name: Dependency
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        description: Dependency outcome to produce
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  dependency:
+    if: inputs.mode != 'skipped'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Report requested mode
+        run: echo "mode=${{ inputs.mode }}"
+      - name: Fail
+        if: inputs.mode == 'failure'
+        run: exit 1
+      - name: Time out
+        if: inputs.mode == 'timeout'
+        run: sleep 180
+      - name: Succeed
+        if: inputs.mode == 'success'
+        run: exit 0

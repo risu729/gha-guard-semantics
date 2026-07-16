@@ -1,0 +1,67 @@
+name: Guard experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Dependency outcome to produce
+        required: true
+        type: choice
+        options:
+          - failure
+          - skipped
+          - timeout
+          - success
+
+permissions: {}
+
+jobs:
+  dependency:
+    uses: ./.github/workflows/dependency.yml
+    with:
+      mode: ${{ inputs.mode }}
+
+  always-contains:
+    name: always + direct needs results
+    needs: dependency
+    if: always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  contains-only:
+    name: direct needs results without always
+    needs: dependency
+    if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  status-functions:
+    name: failure or cancelled
+    needs: dependency
+    if: failure() || cancelled()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  always-status-functions:
+    name: always + failure or cancelled
+    needs: dependency
+    if: always() && (failure() || cancelled())
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  not-cancelled-contains:
+    name: not cancelled + direct needs results
+    needs: dependency
+    if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
