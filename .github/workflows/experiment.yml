@@ -15,6 +15,7 @@ on:
           - allowed-timeout
           - success
           - manual-cancel
+          - direct-timeout
 
 permissions: {}
 
@@ -124,3 +125,38 @@ jobs:
       - run: |
           echo "allowed-timeout=${{ needs.allowed-timeout.result }}"
           echo "allowed-timeout-guard=${{ needs.allowed-timeout-guard.result }}"
+
+  ordinary-dependency:
+    name: Ordinary dependency timeout
+    if: inputs.mode == 'direct-timeout'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: sleep 600
+
+  ordinary-failure-only:
+    name: Ordinary dependency - failure only
+    needs: ordinary-dependency
+    if: failure()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  ordinary-explicit:
+    name: Ordinary dependency - not cancelled + explicit result
+    needs: ordinary-dependency
+    if: ${{ !cancelled() && (needs.ordinary-dependency.result == 'failure' || needs.ordinary-dependency.result == 'cancelled') }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  ordinary-report:
+    name: Report ordinary dependency result
+    needs: ordinary-dependency
+    if: always() && inputs.mode == 'direct-timeout'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: echo "dependency=${{ needs.ordinary-dependency.result }}"
