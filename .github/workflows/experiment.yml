@@ -14,6 +14,7 @@ on:
           - timeout
           - allowed-timeout
           - success
+          - manual-cancel
 
 permissions: {}
 
@@ -27,7 +28,7 @@ jobs:
     name: always + direct needs results
     needs: dependency
     if: always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -36,7 +37,7 @@ jobs:
     name: direct needs results without always
     needs: dependency
     if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -45,7 +46,7 @@ jobs:
     name: failure or cancelled
     needs: dependency
     if: failure() || cancelled()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -54,7 +55,7 @@ jobs:
     name: always + failure or cancelled
     needs: dependency
     if: always() && (failure() || cancelled())
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -63,15 +64,44 @@ jobs:
     name: not cancelled + direct needs results
     needs: dependency
     if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
 
+  failure-only:
+    name: failure only (LayerOne baseline)
+    needs: dependency
+    if: failure()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  not-cancelled-explicit:
+    name: not cancelled + explicit dependency result (LayerOne proposal)
+    needs: dependency
+    if: ${{ !cancelled() && (needs.dependency.result == 'failure' || needs.dependency.result == 'cancelled') }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  dependency-report:
+    name: Report dependency result and workflow cancellation
+    needs: dependency
+    if: always()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: |
+          echo "dependency=${{ needs.dependency.result }}"
+          echo "cancelled=${{ cancelled() }}"
+
   allowed-timeout:
     if: inputs.mode == 'allowed-timeout'
     continue-on-error: true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: sleep 180
@@ -79,7 +109,7 @@ jobs:
   allowed-timeout-guard:
     needs: allowed-timeout
     if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -89,7 +119,7 @@ jobs:
       - allowed-timeout
       - allowed-timeout-guard
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: |

@@ -13,8 +13,8 @@ permissions: {}
 jobs:
   dependency:
     if: inputs.mode != 'skipped'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 1
+    runs-on: ubuntu-26.04
+    timeout-minutes: ${{ inputs.mode == 'manual-cancel' && 10 || 1 }}
     steps:
       - name: Report requested mode
         run: echo "mode=${{ inputs.mode }}"
@@ -22,8 +22,8 @@ jobs:
         if: inputs.mode == 'failure'
         run: exit 1
       - name: Time out
-        if: inputs.mode == 'timeout'
-        run: sleep 180
+        if: inputs.mode == 'timeout' || inputs.mode == 'manual-cancel'
+        run: sleep 600
       - name: Succeed
         if: inputs.mode == 'success'
         run: exit 0
