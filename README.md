@@ -73,6 +73,19 @@ gh workflow run experiment.yml --ref ci/guard-semantics-ubuntu-26.04 -f mode=man
 gh run cancel <manual-cancel-run-id>
 ```
 
+## Ordinary job timeout
+
+A direct dependency on an ordinary job (no reusable workflow and no
+`continue-on-error`) has the same timeout behavior on `ubuntu-26.04` /
+Actions runner 2.337.0. In the `direct-timeout` mode, the job sleeps for ten
+minutes with a one-minute job timeout. The report printed
+`dependency=cancelled`; `failure()` skipped its guard, while the explicit
+`!cancelled()` plus dependency-result condition ran and failed as intended.
+This problem is therefore not specific to reusable workflows.
+
+[Run](https://github.com/risu729/gha-guard-semantics/actions/runs/37658329705) /
+[saved results](results/2026-10-08-ordinary-timeout.json).
+
 ## Historical results: 2026-07-16
 
 Observed on GitHub Actions on 2026-07-16:
