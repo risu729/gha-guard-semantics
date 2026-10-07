@@ -14,6 +14,8 @@ on:
           - timeout
           - allowed-timeout
           - success
+          - manual-cancel
+          - direct-timeout
 
 permissions: {}
 
@@ -27,7 +29,7 @@ jobs:
     name: always + direct needs results
     needs: dependency
     if: always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -36,7 +38,7 @@ jobs:
     name: direct needs results without always
     needs: dependency
     if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -45,7 +47,7 @@ jobs:
     name: failure or cancelled
     needs: dependency
     if: failure() || cancelled()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -54,7 +56,7 @@ jobs:
     name: always + failure or cancelled
     needs: dependency
     if: always() && (failure() || cancelled())
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -63,15 +65,43 @@ jobs:
     name: not cancelled + direct needs results
     needs: dependency
     if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
 
+  failure-only:
+    name: failure only (LayerOne baseline)
+    needs: dependency
+    if: failure()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  not-cancelled-explicit:
+    name: not cancelled + explicit dependency result (LayerOne proposal)
+    needs: dependency
+    if: ${{ !cancelled() && (needs.dependency.result == 'failure' || needs.dependency.result == 'cancelled') }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  dependency-report:
+    name: Report dependency result
+    needs: dependency
+    if: always()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: |
+          echo "dependency=${{ needs.dependency.result }}"
+
   allowed-timeout:
     if: inputs.mode == 'allowed-timeout'
     continue-on-error: true
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: sleep 180
@@ -79,7 +109,7 @@ jobs:
   allowed-timeout-guard:
     needs: allowed-timeout
     if: ${{ !cancelled() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: exit 1
@@ -89,9 +119,44 @@ jobs:
       - allowed-timeout
       - allowed-timeout-guard
     if: always()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 1
     steps:
       - run: |
           echo "allowed-timeout=${{ needs.allowed-timeout.result }}"
           echo "allowed-timeout-guard=${{ needs.allowed-timeout-guard.result }}"
+
+  ordinary-dependency:
+    name: Ordinary dependency timeout
+    if: inputs.mode == 'direct-timeout'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: sleep 600
+
+  ordinary-failure-only:
+    name: Ordinary dependency - failure only
+    needs: ordinary-dependency
+    if: failure()
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  ordinary-explicit:
+    name: Ordinary dependency - not cancelled + explicit result
+    needs: ordinary-dependency
+    if: ${{ !cancelled() && (needs.ordinary-dependency.result == 'failure' || needs.ordinary-dependency.result == 'cancelled') }}
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: exit 1
+
+  ordinary-report:
+    name: Report ordinary dependency result
+    needs: ordinary-dependency
+    if: always() && inputs.mode == 'direct-timeout'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 1
+    steps:
+      - run: echo "dependency=${{ needs.ordinary-dependency.result }}"

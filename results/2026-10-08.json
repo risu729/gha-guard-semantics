@@ -1,0 +1,452 @@
+[
+  {
+    "mode": "failure",
+    "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37651736040",
+    "head_sha": "a7c8dd5ac4ad535c06cbef49326a7a27b0bfcd11",
+    "conclusion": "failure",
+    "created_at": "2026-10-07T16:24:11Z",
+    "jobs": [
+      {
+        "id": 112896519010,
+        "name": "dependency / dependency",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896573917,
+        "name": "failure or cancelled",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574142,
+        "name": "failure only (LayerOne baseline)",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574298,
+        "name": "always + direct needs results",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574310,
+        "name": "always + failure or cancelled",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574321,
+        "name": "not cancelled + explicit dependency result (LayerOne proposal)",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574342,
+        "name": "not cancelled + direct needs results",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896574413,
+        "name": "Report dependency result",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896577294,
+        "name": "direct needs results without always",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      }
+    ]
+  },
+  {
+    "mode": "skipped",
+    "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37651740830",
+    "head_sha": "a7c8dd5ac4ad535c06cbef49326a7a27b0bfcd11",
+    "conclusion": "success",
+    "created_at": "2026-10-07T16:24:13Z",
+    "jobs": [
+      {
+        "id": 112896537283,
+        "name": "Report dependency result",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896539006,
+        "name": "not cancelled + direct needs results",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896539051,
+        "name": "always + direct needs results",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896539080,
+        "name": "failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896539126,
+        "name": "failure only (LayerOne baseline)",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896539723,
+        "name": "direct needs results without always",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896540091,
+        "name": "not cancelled + explicit dependency result (LayerOne proposal)",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896540225,
+        "name": "always + failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896604741,
+        "name": "dependency / dependency",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      }
+    ]
+  },
+  {
+    "mode": "success",
+    "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37651745780",
+    "head_sha": "a7c8dd5ac4ad535c06cbef49326a7a27b0bfcd11",
+    "conclusion": "success",
+    "created_at": "2026-10-07T16:24:16Z",
+    "jobs": [
+      {
+        "id": 112896553681,
+        "name": "dependency / dependency",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896868171,
+        "name": "Report dependency result",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112896869835,
+        "name": "direct needs results without always",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870080,
+        "name": "failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870110,
+        "name": "not cancelled + direct needs results",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870122,
+        "name": "always + failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870756,
+        "name": "always + direct needs results",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870860,
+        "name": "not cancelled + explicit dependency result (LayerOne proposal)",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112896870874,
+        "name": "failure only (LayerOne baseline)",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      }
+    ]
+  },
+  {
+    "mode": "timeout",
+    "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37651752433",
+    "head_sha": "a7c8dd5ac4ad535c06cbef49326a7a27b0bfcd11",
+    "conclusion": "cancelled",
+    "created_at": "2026-10-07T16:24:18Z",
+    "jobs": [
+      {
+        "id": 112896574398,
+        "name": "dependency / dependency",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897277358,
+        "name": "always + direct needs results",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897277470,
+        "name": "not cancelled + explicit dependency result (LayerOne proposal)",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897277578,
+        "name": "not cancelled + direct needs results",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897277681,
+        "name": "Report dependency result",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897279461,
+        "name": "failure only (LayerOne baseline)",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897279636,
+        "name": "failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897279674,
+        "name": "direct needs results without always",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897280526,
+        "name": "always + failure or cancelled",
+        "conclusion": "skipped",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      }
+    ]
+  },
+  {
+    "mode": "manual-cancel",
+    "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37651757258",
+    "head_sha": "a7c8dd5ac4ad535c06cbef49326a7a27b0bfcd11",
+    "conclusion": "cancelled",
+    "created_at": "2026-10-07T16:24:21Z",
+    "jobs": [
+      {
+        "id": 112896590418,
+        "name": "dependency / dependency",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897290976,
+        "name": "Report dependency result",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897291155,
+        "name": "always + direct needs results",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897291198,
+        "name": "always + failure or cancelled",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897291202,
+        "name": "failure or cancelled",
+        "conclusion": "failure",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": true
+      },
+      {
+        "id": 112897293186,
+        "name": "failure only (LayerOne baseline)",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897293476,
+        "name": "not cancelled + explicit dependency result (LayerOne proposal)",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897293713,
+        "name": "direct needs results without always",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      },
+      {
+        "id": 112897294294,
+        "name": "not cancelled + direct needs results",
+        "conclusion": "cancelled",
+        "labels": [
+          "ubuntu-26.04"
+        ],
+        "runner_assigned": false
+      }
+    ]
+  }
+]

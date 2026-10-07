@@ -1,0 +1,42 @@
+{
+  "mode": "direct-timeout",
+  "url": "https://github.com/risu729/gha-guard-semantics/actions/runs/37658329705",
+  "jobs": [
+    {
+      "id": 112919114856,
+      "name": "Ordinary dependency timeout",
+      "conclusion": "cancelled",
+      "runner_name": "GitHub Actions 1000631006",
+      "labels": [
+        "ubuntu-26.04"
+      ]
+    },
+    {
+      "id": 112919789821,
+      "name": "Ordinary dependency - not cancelled + explicit result",
+      "conclusion": "failure",
+      "runner_name": "GitHub Actions 1000631013",
+      "labels": [
+        "ubuntu-26.04"
+      ]
+    },
+    {
+      "id": 112919789845,
+      "name": "Report ordinary dependency result",
+      "conclusion": "success",
+      "runner_name": "GitHub Actions 1000631012",
+      "labels": [
+        "ubuntu-26.04"
+      ]
+    },
+    {
+      "id": 112919791735,
+      "name": "Ordinary dependency - failure only",
+      "conclusion": "skipped",
+      "runner_name": null,
+      "labels": [
+        "ubuntu-26.04"
+      ]
+    }
+  ]
+}
