@@ -88,7 +88,7 @@ jobs:
       - run: exit 1
 
   dependency-report:
-    name: Report dependency result and workflow cancellation
+    name: Report dependency result
     needs: dependency
     if: always()
     runs-on: ubuntu-26.04
@@ -96,7 +96,6 @@ jobs:
     steps:
       - run: |
           echo "dependency=${{ needs.dependency.result }}"
-          echo "cancelled=${{ cancelled() }}"
 
   allowed-timeout:
     if: inputs.mode == 'allowed-timeout'
